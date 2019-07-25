@@ -22,27 +22,23 @@ public class UserController {
         return userDAO.findAll();
     }
 
-    @GetMapping("/user/username/{username}")
-    public User getAllUsers(@PathVariable(value="username") String username)
-    {
+    @GetMapping("/user/{username:[a-zA-Z]+}")
+    public User getAllUsers(@PathVariable(value="username") String username) {
         return userDAO.findByUsername(username);
     }
 
-    @PostMapping("/user/username/{username}")
+    @PostMapping("/user/{username:[a-zA-Z]+}")
     public void modifyUserByUsername(@Valid @RequestBody User user,@PathVariable(value="username") String username) throws Exception {
-
         userDAO.modifyUserByUsername(user,username);
     }
 
-    @DeleteMapping("/user/username/{username}")
+    @DeleteMapping("/user/{username:[a-zA-Z]+}")
     public void deleteUserByUsername(@PathVariable(value="username") String username) throws Exception {
-
         userDAO.deleteUserByUsername(username);
     }
 
     @PostMapping("/register")
     public void addUser(@Valid @RequestBody User user) throws Exception {
-
         Session session=HibernateUtil.getSessionFactory().openSession();
         String query="SELECT * FROM users WHERE username=\""+user.getUserName()+"\"";
         SQLQuery sqlQuery=session.createSQLQuery(query);
@@ -53,24 +49,21 @@ public class UserController {
 
         }
         else userDAO.addUser(user);
-
     }
 
-    @GetMapping("/user/id/{id}")
+    @GetMapping("/user/{id:[0-9]+}")
     public User getAllUsers(@PathVariable(value="id") int id)
     {
         return userDAO.findByID(id);
     }
 
-    @PostMapping("/user/id/{id}")
+    @PostMapping("/user/{id:[0-9]+}")
     public void modifyUserById(@Valid @RequestBody User user,@PathVariable(value="id") int id) throws Exception {
-
         userDAO.modifyUserByID(user,id);
     }
 
-    @DeleteMapping("/user/id/{id}")
+    @DeleteMapping("/user/{id:[0-9]+}")
     public void deleteUserById(@PathVariable(value="id") int id) throws Exception {
-
         userDAO.deleteUserByID(id);
     }
 

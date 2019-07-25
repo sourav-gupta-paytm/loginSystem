@@ -67,7 +67,7 @@ public class UserDAOImpl implements UserDAO {
                 "\""+user.getName()+"\")";
         session.createSQLQuery(query).executeUpdate();
         session.getTransaction().commit();
-
+        //session.close();
     }
 
     @Override
@@ -80,6 +80,7 @@ public class UserDAOImpl implements UserDAO {
                 " WHERE id="+id;
         session.createSQLQuery(query).executeUpdate();
         session.getTransaction().commit();
+        //session.close();
 
     }
 
@@ -93,6 +94,7 @@ public class UserDAOImpl implements UserDAO {
                 " WHERE username=\""+username+"\"";
         session.createSQLQuery(query).executeUpdate();
         session.getTransaction().commit();
+        //session.close();
 
     }
 
@@ -102,6 +104,8 @@ public class UserDAOImpl implements UserDAO {
         String query="DELETE FROM users WHERE id="+id;
         session.createSQLQuery(query).executeUpdate();
         session.getTransaction().commit();
+        //session.close();
+
     }
 
     @Override
@@ -110,6 +114,8 @@ public class UserDAOImpl implements UserDAO {
         String query="DELETE FROM users WHERE username=\""+username+"\"";
         session.createSQLQuery(query).executeUpdate();
         session.getTransaction().commit();
+        //session.close();
+
     }
 
     public User getUserFromResults(Object[] rows)
